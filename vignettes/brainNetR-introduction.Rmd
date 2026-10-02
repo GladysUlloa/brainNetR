@@ -1,0 +1,148 @@
+---
+title: "Introduction to brainNetR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{brainNetR-introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+`brainNetR` is an open-source R package for reproducible analysis of brain connectivity networks.
+
+The package provides a simple workflow for transforming brain connectivity matrices into graph representations, computing core network neuroscience metrics, and visualizing the resulting network.
+
+This vignette presents a basic workflow using the current development version of the package.
+
+## 1. Brain connectivity matrices
+
+In network neuroscience, brain connectivity is commonly represented as a square matrix.
+
+Each row and column corresponds to a brain region or region of interest (ROI), while each matrix entry represents the strength of connectivity between two regions.
+
+For example:
+
+```{r}
+mat <- matrix(
+  c(
+    1.0, 0.7, 0.2,
+    0.7, 1.0, 0.5,
+    0.2, 0.5, 1.0
+  ),
+  nrow = 3,
+  byrow = TRUE
+)
+
+mat
+```
+
+In this example, the matrix represents three brain regions.
+
+## 2. Converting a connectivity matrix into a graph
+
+The `connectivity_to_graph()` function transforms a connectivity matrix into an `igraph` object.
+
+A connectivity threshold can be specified to retain only connections above a given magnitude.
+
+```{r}
+library(brainNetR)
+
+graph <- connectivity_to_graph(
+  mat,
+  threshold = 0.3
+)
+
+graph
+```
+
+Values below the selected threshold are removed before the graph is created.
+
+The diagonal of the matrix is also removed because self-connections are not considered in the current implementation.
+
+## 3. Computing brain network metrics
+
+Once the graph has been created, basic network-level metrics can be calculated with `brain_network_metrics()`.
+
+```{r}
+metrics <- brain_network_metrics(graph)
+
+metrics
+```
+
+The current version returns:
+
+- number of nodes;
+- number of edges;
+- mean degree;
+- clustering coefficient;
+- global efficiency;
+- modularity.
+
+These measures provide a basic description of the topology of the brain network.
+
+## 4. Visualizing the network
+
+The network can be visualized using `plot_brain_network()`.
+
+```{r}
+plot_brain_network(graph)
+```
+
+The current visualization is intentionally simple and is designed primarily for exploratory analysis.
+
+## 5. Complete workflow
+
+The basic workflow implemented by `brainNetR` can be summarized as:
+
+```text
+Brain connectivity matrix
+        |
+        v
+connectivity_to_graph()
+        |
+        v
+Brain network
+        |
+        +-----------------------+
+        |                       |
+        v                       v
+brain_network_metrics()   plot_brain_network()
+        |                       |
+        v                       v
+Network metrics           Network visualization
+```
+
+This allows a user to move from a connectivity matrix to a graph-based representation using a small number of commands.
+
+## 6. Scientific scope
+
+The current version of `brainNetR` focuses specifically on the analysis of connectivity matrices that have already been estimated.
+
+The package does not currently perform:
+
+- fMRI preprocessing;
+- extraction of ROI time series;
+- estimation of functional connectivity from raw neuroimaging data;
+- machine learning classification;
+- causal connectivity analysis.
+
+These steps remain outside the scope of the initial version.
+
+The package is intended to provide a lightweight and reproducible layer between an already-computed connectivity matrix and graph-based network analysis.
+
+## 7. Intended users
+
+`brainNetR` may be useful for:
+
+- researchers in computational neuroscience;
+- researchers working with functional connectivity;
+- students learning network neuroscience;
+- users working with fMRI-derived connectivity matrices;
+- researchers preparing graph-based features for statistical or machine learning analyses.
+
+## 8. Development status
+
+`brainNetR` is currently under active development.
+
+The first version intentionally focuses on a small number of functions in order to maintain a clear and reproducible workflow.
+
+Future development may include additional metrics, validation tools, visualization options, thresholding strategies, and support for more complex brain network analyses. 
