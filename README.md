@@ -1,0 +1,303 @@
+
+# brainNetR
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+**brainNetR** is an open-source R package for reproducible analysis of
+brain connectivity networks.
+
+It provides a simple workflow to transform brain connectivity matrices
+into graph representations and compute core network neuroscience metrics
+using R.
+
+The package is designed for researchers and students working in
+**computational neuroscience, neuroimaging, functional connectivity, and
+network neuroscience**.
+
+------------------------------------------------------------------------
+
+## Overview
+
+Brain connectivity studies commonly represent relationships between
+brain regions using connectivity matrices.
+
+In these matrices:
+
+- rows and columns represent brain regions or ROIs;
+- matrix values represent the strength of connectivity between regions.
+
+`brainNetR` provides a simple workflow for moving from a connectivity
+matrix to a graph-based representation:
+
+``` text
+Brain connectivity matrix
+          |
+          v
+      Thresholding
+          |
+          v
+    Graph representation
+          |
+          v
+   Network neuroscience
+        metrics
+```
+
+The goal is to provide an accessible and reproducible interface for
+basic brain network analysis without requiring users to manually
+implement each step.
+
+------------------------------------------------------------------------
+
+## Current functionality
+
+The current development version includes two main functions.
+
+### `connectivity_to_graph()`
+
+Transforms a square brain connectivity matrix into an `igraph` network
+using a user-defined connectivity threshold.
+
+``` r
+graph <- connectivity_to_graph(
+  matrix,
+  threshold = 0.3
+)
+```
+
+### `brain_network_metrics()`
+
+Computes basic graph-level properties from the resulting brain network.
+
+Current metrics include:
+
+- number of nodes;
+- number of edges;
+- mean degree;
+- clustering coefficient;
+- global efficiency;
+- modularity.
+
+``` r
+brain_network_metrics(graph)
+```
+
+------------------------------------------------------------------------
+
+## Installation
+
+The development version can be installed directly from GitHub.
+
+``` r
+install.packages("remotes")
+
+remotes::install_github(
+  "GladysUlloa/brainNetR"
+)
+```
+
+Then load the package:
+
+``` r
+library(brainNetR)
+```
+
+------------------------------------------------------------------------
+
+## Quick example
+
+Create a small example connectivity matrix:
+
+``` r
+mat <- matrix(
+  c(
+    1.0, 0.7, 0.2,
+    0.7, 1.0, 0.5,
+    0.2, 0.5, 1.0
+  ),
+  nrow = 3,
+  byrow = TRUE
+)
+```
+
+Convert the matrix into a graph:
+
+``` r
+graph <- connectivity_to_graph(
+  mat,
+  threshold = 0.3
+)
+```
+
+Compute network metrics:
+
+``` r
+brain_network_metrics(graph)
+```
+
+Example output:
+
+``` text
+  n_nodes n_edges mean_degree clustering_coefficient global_efficiency modularity
+1       3       2    1.333333                      0         0.8333333          0
+```
+
+------------------------------------------------------------------------
+
+## Scientific context
+
+Brain networks are commonly modeled as graphs in which brain regions are
+represented as nodes and functional or structural relationships are
+represented as edges.
+
+This type of representation is widely used in network neuroscience to
+study properties such as:
+
+- integration;
+- segregation;
+- network topology;
+- modular organization;
+- connectivity patterns.
+
+`brainNetR` is being developed as a lightweight tool for basic and
+reproducible analysis of these networks in R.
+
+The initial focus is on connectivity matrices that have already been
+estimated from neuroimaging data, including matrices derived from
+functional MRI.
+
+The package does **not** currently perform fMRI preprocessing or
+estimate functional connectivity directly from raw neuroimaging data.
+
+------------------------------------------------------------------------
+
+## Intended users
+
+`brainNetR` is intended for:
+
+- computational neuroscience researchers;
+- neuroimaging researchers;
+- students learning network neuroscience;
+- researchers working with fMRI connectivity matrices;
+- R users interested in graph-based brain analysis;
+- researchers preparing brain network features for subsequent
+  statistical or machine learning analyses.
+
+------------------------------------------------------------------------
+
+## Design philosophy
+
+The first versions of `brainNetR` intentionally focus on a small and
+transparent workflow.
+
+The package aims to be:
+
+- **simple** — focused on a small number of clearly defined tasks;
+- **reproducible** — analyses can be scripted and repeated;
+- **accessible** — suitable for researchers who are not graph theory
+  specialists;
+- **extensible** — additional network neuroscience functionality can be
+  added progressively;
+- **open source** — developed publicly and transparently on GitHub.
+
+------------------------------------------------------------------------
+
+## Development status
+
+`brainNetR` is currently under active development.
+
+Current workflow:
+
+``` text
+Connectivity matrix
+        ↓
+connectivity_to_graph()
+        ↓
+igraph network
+        ↓
+brain_network_metrics()
+        ↓
+Network-level summary
+```
+
+Future versions may include:
+
+- brain network visualization;
+- additional node-level metrics;
+- additional graph-level metrics;
+- connectivity matrix validation;
+- different thresholding strategies;
+- comparison of brain networks;
+- example neuroimaging datasets;
+- integration with downstream statistical and machine learning
+  workflows.
+
+The scope of these extensions will evolve during development.
+
+------------------------------------------------------------------------
+
+## Example research workflow
+
+A typical use of `brainNetR` could be:
+
+``` text
+fMRI data
+    ↓
+Preprocessing
+    ↓
+ROI time series
+    ↓
+Functional connectivity matrix
+    ↓
+brainNetR
+    ↓
+Brain graph
+    ↓
+Network metrics
+    ↓
+Statistical analysis / Machine Learning
+```
+
+`brainNetR` currently focuses specifically on the **connectivity matrix
+→ graph → network metrics** portion of this workflow.
+
+------------------------------------------------------------------------
+
+## Author
+
+**Gladys Choque Ulloa**
+
+Ph.D. Student in Computer Science  
+University of São Paulo, Brazil
+
+Research interests include:
+
+- computational neuroscience;
+- functional brain connectivity;
+- network neuroscience;
+- machine learning;
+- data science;
+- reproducible scientific software.
+
+------------------------------------------------------------------------
+
+## Contributing
+
+`brainNetR` is currently in an early stage of development.
+
+Suggestions, bug reports, and discussions about potential improvements
+are welcome through GitHub Issues.
+
+------------------------------------------------------------------------
+
+## Citation
+
+A formal citation will be added as the package reaches a stable release.
+
+------------------------------------------------------------------------
+
+## License
+
+A software license will be defined before the first stable release.
