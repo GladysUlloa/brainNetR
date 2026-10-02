@@ -8,7 +8,7 @@
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![R
 package](https://img.shields.io/badge/R-package-blue.svg)](https://www.r-project.org/)
-
+[![R-CMD-check](https://github.com/GladysUlloa/brainNetR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/GladysUlloa/brainNetR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **brainNetR** is an open-source R package for reproducible analysis of
