@@ -80,20 +80,26 @@ brain_network_metrics(graph)
 
 ## Installation
 
-The development version can be installed directly from GitHub.
+You can install the latest released version of `brainNetR` directly from GitHub:
 
 ```r
+# Install remotes if needed
 install.packages("remotes")
 
-remotes::install_github(
-  "GladysUlloa/brainNetR"
-)
+# Install brainNetR
+remotes::install_github("GladysUlloa/brainNetR@v0.1.0")
 ```
 
-Then load the package:
+Then load the package with:
 
 ```r
 library(brainNetR)
+```
+
+To install the current development version from the main branch:
+
+```r
+remotes::install_github("GladysUlloa/brainNetR")
 ```
 
 ---
