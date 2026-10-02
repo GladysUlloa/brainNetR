@@ -1,5 +1,6 @@
 ---
 title: "Introduction to brainNetR"
+author: "Author: Gladys Choque Ulloa"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{brainNetR-introduction}
@@ -24,11 +25,14 @@ For example:
 ```{r}
 mat <- matrix(
   c(
-    1.0, 0.7, 0.2,
-    0.7, 1.0, 0.5,
-    0.2, 0.5, 1.0
+    1.0, 0.8, 0.2, 0.0, 0.4, 0.0,
+    0.8, 1.0, 0.6, 0.3, 0.5, 0.1,
+    0.2, 0.6, 1.0, 0.7, 0.2, 0.4,
+    0.0, 0.3, 0.7, 1.0, 0.8, 0.5,
+    0.4, 0.5, 0.2, 0.8, 1.0, 0.6,
+    0.0, 0.1, 0.4, 0.5, 0.6, 1.0
   ),
-  nrow = 3,
+  nrow = 6,
   byrow = TRUE
 )
 
@@ -83,7 +87,7 @@ These measures provide a basic description of the topology of the brain network.
 
 The network can be visualized using `plot_brain_network()`.
 
-```{r}
+```{r, fig.width=7, fig.height=6, dpi=180, out.width="80%", fig.align="center"}
 plot_brain_network(graph)
 ```
 

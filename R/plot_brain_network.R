@@ -1,12 +1,9 @@
 #' Plot a brain connectivity network
 #'
-#' Produces a simple visualization of a brain connectivity network
-#' represented as an igraph object.
+#' Produces a visualization of a brain connectivity network represented
+#' as an igraph object. Edge width reflects connectivity strength.
 #'
 #' @param graph An igraph graph object.
-#' @param vertex_size Numeric value controlling node size.
-#' @param show_labels Logical. Whether to display node labels.
-#'
 #' @return Invisibly returns the input graph.
 #'
 #' @export
@@ -24,27 +21,41 @@
 #'
 #' g <- connectivity_to_graph(mat, threshold = 0.3)
 #' plot_brain_network(g)
-plot_brain_network <- function(
-    graph,
-    vertex_size = 20,
-    show_labels = TRUE
-) {
-
+plot_brain_network <- function(graph) {
   if (!inherits(graph, "igraph")) {
     stop("`graph` must be an igraph object.")
   }
 
-  labels <- if (show_labels) {
-    igraph::V(graph)$name
+  # Layout más profesional
+  layout_coords <- igraph::layout_with_fr(graph)
+
+  # Tamaño de aristas según pesos
+  if (!is.null(igraph::E(graph)$weight)) {
+    w <- igraph::E(graph)$weight
+    edge_width <- 1 + 5 * w / max(w)
   } else {
-    NA
+    edge_width <- rep(2, igraph::ecount(graph))
   }
 
+  # Tamaño de nodos según grado
+  deg <- igraph::degree(graph)
+  vertex_size <- 22 + 4 * deg
+
+  # Plot
   plot(
     graph,
+    layout = layout_coords,
     vertex.size = vertex_size,
-    vertex.label = labels,
-    edge.width = 2
+    vertex.color = "gold",
+    vertex.frame.color = "gray30",
+    vertex.label.color = "black",
+    vertex.label.cex = 1,
+    vertex.label.family = "sans",
+    edge.width = edge_width,
+    edge.color = "gray60",
+    edge.curved = 0.1,
+    main = "Brain Connectivity Network",
+    margin = 0.2
   )
 
   invisible(graph)

@@ -4,21 +4,17 @@
 \alias{plot_brain_network}
 \title{Plot a brain connectivity network}
 \usage{
-plot_brain_network(graph, vertex_size = 20, show_labels = TRUE)
+plot_brain_network(graph)
 }
 \arguments{
 \item{graph}{An igraph graph object.}
-
-\item{vertex_size}{Numeric value controlling node size.}
-
-\item{show_labels}{Logical. Whether to display node labels.}
 }
 \value{
 Invisibly returns the input graph.
 }
 \description{
-Produces a simple visualization of a brain connectivity network
-represented as an igraph object.
+Produces a visualization of a brain connectivity network represented
+as an igraph object. Edge width reflects connectivity strength.
 }
 \examples{
 mat <- matrix(
