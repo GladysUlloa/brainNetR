@@ -3,6 +3,12 @@
 
 <!-- badges: start -->
 
+[![Release](https://img.shields.io/github/v/release/GladysUlloa/brainNetR)](https://github.com/GladysUlloa/brainNetR/releases)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![R
+package](https://img.shields.io/badge/R-package-blue.svg)](https://www.r-project.org/)
+
 <!-- badges: end -->
 
 **brainNetR** is an open-source R package for reproducible analysis of
