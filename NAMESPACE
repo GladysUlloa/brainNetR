@@ -2,3 +2,4 @@
 
 export(brain_network_metrics)
 export(connectivity_to_graph)
+export(plot_brain_network)
